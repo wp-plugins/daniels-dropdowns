@@ -3,7 +3,7 @@
 Plugin Name: Daniel's DropDowns
 Plugin URI: http://www.djs-consulting.com/linux/blog/category/programming/wordpress/plug-ins
 Description: Extends the WordPress category and archive lists by providing a dropdown and associated button or link.
-Version: 2
+Version: 2.0.1
 Author: Daniel J. Summers
 Author URI: http://www.djs-consulting.com/linux/blog 
 
@@ -83,8 +83,10 @@ function daniels_category_dropdown (
 		echo ( "aLink[$iThisCat] = '" . get_category_link ( $iThisCat ) . "';\n" );
 	} ?>
 	function goCat() {
-		window.location =
-				aLink[document.getElementById('cat')[document.getElementById('cat').selectedIndex].value]; 
+		var elGato = document.getElementById('cat');
+		if (elGato.selectedIndex > 0) {
+			window.location = aLink[elGato[elGato.selectedIndex].value];
+		}
 	}
 	</script>
 	<div style="text-align:center;">
@@ -94,6 +96,18 @@ function daniels_category_dropdown (
 	$cats = str_replace ( '(0)', '', 
 		wp_dropdown_categories (
 			"class=$sSelectClass&orderby=name&show_count=1&hierarchical=1&echo=0" ) );
+	
+	// Add a "Select Category" option.
+	$cats = str_replace ( "class=''>",
+		"class=''><option value=''>&mdash; Select Category &mdash;</option>",
+		$cats);
+	if ( !strpos ( $cats, 'selected="selected"' ) ) {
+		// Another category is not selected, so make the "Select Category"
+		// option the default.
+		$cats = str_replace ( "value=''>", "value='' selected='selected'>", 
+			$cats );
+	}
+	
 	if ( $sNavigationType == 'auto' ) {
 		echo str_replace ( '<select', '<select onchange="goCat();"', $cats );
 	}
@@ -141,9 +155,9 @@ function daniels_archive_dropdown (
 <form id="ddd_archive_form" action="">
 	<script type="text/javascript">
 	function goArc() {
-		if (document.getElementById('selArchive').selectedIndex > 0) {
-			window.location = 
-					document.getElementById('selArchive')[document.getElementById('selArchive').selectedIndex].value;
+		var selArc = document.getElementById('selArchive');
+		if (selArc.selectedIndex > 0) {
+			window.location = selArc[selArc.selectedIndex].value;
 		} 
 	}
 	</script>
