@@ -3,7 +3,7 @@
 Plugin Name: Daniel's DropDowns
 Plugin URI: http://www.djs-consulting.com/linux/blog/category/programming/wordpress/plug-ins
 Description: Extends the WordPress category and archive lists by providing a dropdown and associated button or link.
-Version: 2.0.1
+Version: 2.1
 Author: Daniel J. Summers
 Author URI: http://www.djs-consulting.com/linux/blog 
 
@@ -98,10 +98,11 @@ function daniels_category_dropdown (
 			"class=$sSelectClass&orderby=name&show_count=1&hierarchical=1&echo=0" ) );
 	
 	// Add a "Select Category" option.
-	$cats = str_replace ( "class=''>",
-		"class=''><option value=''>&mdash; Select Category &mdash;</option>",
+	
+	$cats = str_replace ( "class=''",
+		"class=''><option value=''>&mdash; Select Category &mdash;</option",
 		$cats);
-	if ( !strpos ( $cats, 'selected="selected"' ) ) {
+	if ( strpos ( $cats, 'selected="selected"' ) !== false ) {
 		// Another category is not selected, so make the "Select Category"
 		// option the default.
 		$cats = str_replace ( "value=''>", "value='' selected='selected'>", 

@@ -2,7 +2,7 @@
 Contributors: danielsummers
 Tags: categories, archives, dropdowns
 Requires at least: 2.0
-Tested up to: 2.3.2
+Tested up to: 2.5.1
 Stable tag: trunk
 
 This plugin extends the category and archive lists by providing a dropdown
@@ -31,6 +31,9 @@ each tag.
 NEW FOR 2.0.1 - There is now a "Select Category" option in the category
 dropdown, and it is the default.  This allows the auto-navigation to work
 properly for the first category in the list.
+
+NEW FOR 2.1 - The "Select Category" option was not correctly displayed in the
+2.5-series, due to an extra space in the category dropdown output.
 
 == Installation ==
 
