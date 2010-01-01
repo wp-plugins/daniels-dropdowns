@@ -2,7 +2,7 @@
 Contributors: danielsummers
 Tags: categories, archives, dropdowns
 Requires at least: 2.0
-Tested up to: 2.5.1
+Tested up to: 2.9
 Stable tag: trunk
 
 This plugin extends the category and archive lists by providing a dropdown
